@@ -23,6 +23,14 @@
 	var express = require('express');
 	var app = express();
 
+	require('./config/express')(app, config);
+	require('./routes')(app);
+
+	app.listen(bindTo.port, bindTo.address, function () {
+        console.log('http: listen %s:%s', bindTo.address, bindTo.port);
+	});
+
+/*
 	var httpserver = http.createServer(function (req, res) {
 
 		res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -70,6 +78,6 @@
 		console.log('Server running at http://127.0.0.1:25003/');
 
 	});
-
+*/
 
 })();
