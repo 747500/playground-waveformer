@@ -5,10 +5,13 @@
 
 	var os = require('os');
 	var _ = require('underscore');
-	var path = require('path');
-	var rootPath = path.normalize(path.join(__dirname, '..'));
-	var strftime = require('strftime');
 	var util = require('util');
+	var path = require('path');
+
+	var strftime = require('strftime');
+	var sprintf = require('sprintf');
+
+	var rootPath = path.normalize(path.join(__dirname, '..'));
 
 	module.exports = {
 		development: {
@@ -36,13 +39,12 @@
 		var strTs = strftime('%d %b %Y %T %Z', now);
 	//	var hname = (os.hostname() || process.env.HOSTNAME || 'localhost'),
 		var pname = path.basename(require.main.filename, '.js');
-		var args = [ '%s %s[%s]:', strTs, pname, process.pid ].concat(arguments);
-		_.map(args, function (el) {
-			var toExpose = el &&
-					'object' === typeof el;
+		var prefix = [ '%s %s[%s]: ', strTs, pname, process.pid ];
+		var args = _(arguments).chain().values().map(function (el) {
+			var toExpose = el && 'object' === typeof el;
 			return toExpose ? util.inspect(el) : el;
-		});
-		uti.puts(util.format.apply(util, args));
+		}).value();
+		util.puts(sprintf.apply(this, prefix) + sprintf.apply(this, args));
 	}
 
 	if (console.log !== console_log) {
@@ -50,4 +52,3 @@
 	}
 
 })();
-

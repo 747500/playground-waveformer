@@ -10,17 +10,18 @@
 
 		app.set('showStackError', true);
 
-		// should be placed before express.static
 /*
+		// should be placed before express.static
 		app.use(express.compress({
 			filter: function (req, res) {
-				return /json|text|javascript|css/.test(res.getHeader('Content-Type'))
+				var h = res.getHeader('Content-Type');
+				return /json|text|javascript|css/.test(h)
 			},
 			level: 6
 		}));
 */
 
-		app.use(express.favicon());
+//		app.use(express.favicon());
 		app.use(express.static(path.join(config.root, 'public')));
 
 		app.use(express.logger('dev'));
@@ -45,7 +46,10 @@
 			}));
 */
 			app.use(app.router);
-			app.use(express.errorHandler({ showStack: true, dumpExceptions: true }));
+			app.use(express.errorHandler({
+				showStack: true,
+				dumpExceptions: true
+			}));
 
 		});
 
@@ -60,4 +64,3 @@
 	};
 
 })();
-

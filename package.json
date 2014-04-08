@@ -1,6 +1,6 @@
 {
   "name": "waveformer",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Waveform generator",
   "main": "waveformer.js",
   "scripts": {
@@ -15,6 +15,12 @@
     "mp3",
     "canvas"
   ],
+  "dependencies": {
+    "when": "*",
+    "express": "*",
+    "strftime": "*",
+    "canvas": "*"
+  },
   "author": "Serge R",
   "license": "BSD",
   "bugs": {

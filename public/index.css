@@ -1,0 +1,58 @@
+
+html {
+	margin: 0;
+	padding: 0;
+	font-size: 100.001%;
+}
+
+body {
+	margin: none;
+	padding: none;
+	background-color: #eee;
+/*	font-size: .90em;
+*/}
+
+.control-group {
+	padding: 1em .5em 0 1em;
+}
+
+form {
+	position: absolute;
+	top: 2em;
+	left: 2em;
+	width: 24em;
+	bottom: 2em;
+	overflow: auto;
+	border: 1px solid #bbb;
+	background-color: white;
+	padding: 0;
+	margin: 0;
+}
+
+.form-actions {
+	margin-bottom: 0;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+
+.help-inline {
+	font-size: .85em;
+	display: block;
+}
+
+#wf-img {
+	position: absolute;
+	top: 2em;
+	left: 28em;
+	bottom: 2em;
+	right: 2em;
+	border: 1px solid #bbb;
+	background-color: white;
+	overflow: auto;
+	margin: 0;
+	padding: 0;
+}
+
+#wf-img .content {
+	padding: 1em;
+}

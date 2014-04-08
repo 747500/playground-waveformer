@@ -5,12 +5,12 @@
 
 	var util = require('util');
 
-//	var user = require('../controllers/user');
+	var wf = require('./wf.js');
 
 	module.exports = function (app) {
 	//	app.all('/*', user.load);
 	//	app.get('/im/messages/:userId', im.history);
-	//	app.post('/im/to/:userId', im.toUserId);
+		app.post('/gen', wf.generator);
 	};
 
 })();
