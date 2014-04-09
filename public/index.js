@@ -6,19 +6,37 @@ $(function () {
 		schema: {
 			type: 'object',
 			properties: {
+				preproc: {
+					type: 'object',
+					title: 'Препроцессинг',
+					properties: {
+						maximize: {
+							type: 'boolean',
+							title: 'preproc.maximize',
+							description: 'Усиление/нормализация',
+							required: true
+						},
+						log10: {
+							type: 'boolean',
+							title: 'preproc.log10',
+							description: 'Логарифмическая шкала',
+							required: true
+						}
+					}
+				},
 				rendering: {
 					type: 'object',
 					title: 'Рендеринг',
 					properties: {
 						smooth: {
 							type: 'boolean',
-							title: 'smooth',
+							title: 'rendering.smooth',
 							description: 'Использовать сглаживание',
 							required: true
 						},
 						lineWidth: {
 							type: 'number',
-							title: 'lineWidth',
+							title: 'rendering.lineWidth',
 							description: 'Толщина инструмента',
 							required: true
 						}
@@ -30,13 +48,13 @@ $(function () {
 					properties: {
 						width: {
 							type: 'integer',
-							title: 'width',
+							title: 'size.width',
 							description: 'Ширина картинки',
 							required: true
 						},
 						height: {
 							type: 'integer',
-							title: 'height',
+							title: 'size.height',
 							description: 'Высота каритинки',
 							required: true
 						}
@@ -48,13 +66,13 @@ $(function () {
 					properties: {
 						sspace: {
 							type: 'integer',
-							title: 'sspace',
+							title: 'indenting.sspace',
 							description: 'Ширина отступов слева и справа',
 							required: true
 						},
 						hspace: {
 							type: 'integer',
-							title: 'hspace',
+							title: 'indenting.hspace',
 							description: 'Высота отступа между верхом и низом',
 							required: true
 						}
@@ -66,12 +84,12 @@ $(function () {
 					properties: {
 						positive: {
 							type: 'color',
-							title: 'positive',
+							title: 'colors.positive',
 							description: 'Цвет верхней части'
 						},
 						negative: {
 							type: 'color',
-							title: 'negative',
+							title: 'colors.negative',
 							description: 'Цвет нижней части'
 						}
 					}

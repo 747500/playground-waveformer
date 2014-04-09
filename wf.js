@@ -18,17 +18,19 @@
 //	var afile = '/home/native/Music/A Wilhelm Scream - The Horse.mp3';
 //	var afile = '/var/www/Data/usersaudios/00/92/37/00299866137091379200/file.mp3';
 //	var afile = '/home/native/Music/01 Twisted Transistor/Unknown/00 - 2e399e2ccc3bad.mp3.mp3';
-	var afile = '/home/native/Music/Soul Hooligan/Unknown/01 - Algebra.mp3';
+//	var afile = '/home/native/Music/Soul Hooligan/Unknown/01 - Algebra.mp3';
+	var afile = '/home/native/Music/Чайковский Петр Ильич [club13333245] - Времена года - Апрель- Подснежник.mp3';
 
 	function log10(val) {
 		return Math.log(val) / Math.LN10;
 	}
 
-	var MINVAL = 1 / 20;
-	var MAXVAL = log10((MINVAL + 1) / MINVAL);
 
 	module.exports.generator = function (req, res, next) {
 		var wfStyle = [ req.body ];
+console.log(wfStyle);
+		var MINVAL = 1 / wfStyle[0].size.height;
+		var MAXVAL = log10((MINVAL + 1) / MINVAL);
 
 		var ok = audio2raw(afile);
 
@@ -38,13 +40,38 @@
 
 			return ok.then(function (peaks) {
 				var l = peaks[0].length;
+
+				// amplification
+				var k;
+				if (wfStyle[0].preproc.maximize) {
+					var max = 0;
+					for (var n = 0; n < l; n ++) {
+						if (max < peaks[0][n]) max = peaks[0][n];
+					}
+					k = 1 / max;
+				}
+				else {
+					k = 1;
+				}
+
 				for (var n = 0; n < l; n ++) {
- 					var p0 = peaks[0][n];
-					var p = log10((MINVAL + p0) / MINVAL) / MAXVAL;
+				//	test signal
+				//	var p0 = 1 / l * n;
 
-					console.log(sprintf("%12.5f %12.5f", p0, p));
+					var p0 = peaks[0][n] * k;
 
+				// empty graph on zero signal avoidance
+					p0 += .001;
+
+					var p;
+					if (wfStyle[0].preproc.log10) {
+						p = log10((MINVAL + p0) / MINVAL) / MAXVAL;
+					}
+					else {
+						p = p0;
+					}
 					peaks[0][n] = p;
+					console.log(sprintf("%12.5f %12.5f", p0, p));
 				}
 
 				return {

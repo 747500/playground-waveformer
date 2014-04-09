@@ -14,5 +14,9 @@
   "rendering": {
     "smooth": true,
 	"lineWidth": 1
+  },
+  "preproc": {
+    "maximize": true,
+    "log10": true
   }
 }
