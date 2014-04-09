@@ -15,6 +15,12 @@ $(function () {
 							title: 'smooth',
 							description: 'Использовать сглаживание',
 							required: true
+						},
+						lineWidth: {
+							type: 'number',
+							title: 'lineWidth',
+							description: 'Толщина инструмента',
+							required: true
 						}
 					},
 				},

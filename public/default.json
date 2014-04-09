@@ -8,10 +8,11 @@
     "hspace": 1
   },
   "colors": {
-    "positive": "#ab7070",
-    "negative": "#2b48b8"
+    "positive": "#fa9632",
+    "negative": "#3296fa"
   },
   "rendering": {
-    "smooth": true
+    "smooth": true,
+	"lineWidth": 1
   }
 }
