@@ -1,7 +1,17 @@
 {
-  "smooth": true,
-  "width": 1200,
-  "height": 115,
-  "hspace": 1,
-  "sspace": 0
+  "size": {
+    "width": 1200,
+    "height": 115
+  },
+  "indenting": {
+    "sspace": 0,
+    "hspace": 1
+  },
+  "colors": {
+    "positive": "#ab7070",
+    "negative": "#2b48b8"
+  },
+  "rendering": {
+    "smooth": true
+  }
 }

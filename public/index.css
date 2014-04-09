@@ -8,32 +8,46 @@ html {
 body {
 	margin: none;
 	padding: none;
-	background-color: #eee;
-/*	font-size: .90em;
-*/}
+	background-color: white;
+}
 
-.control-group {
-	padding: 1em .5em 0 1em;
+fieldset.control-group {
+	padding: 0;
+	margin: 0 1em;
+}
+
+div.control-group {
+	padding: 0;
+	margin: 0;
+	margin-bottom: 1em;
+}
+
+.controls input[type=text] {
+	width: 6em;
+	text-align: right;
 }
 
 form {
 	position: absolute;
-	top: 2em;
-	left: 2em;
-	width: 24em;
-	bottom: 2em;
+	bottom: 0;
+	left: 0;
+	right: 0;
 	overflow: auto;
-	border: 1px solid #bbb;
 	background-color: white;
 	padding: 0;
 	margin: 0;
 }
 
-.form-actions {
-	margin-bottom: 0;
-	border-bottom: 1px solid #e5e5e5;
+fieldset {
+	width: 14em;
+	float: left;
+	padding: .5em;
 }
 
+.form-actions {
+	margin-bottom: 0;
+	clear: both;
+}
 
 .help-inline {
 	font-size: .85em;
@@ -41,14 +55,6 @@ form {
 }
 
 #wf-img {
-	position: absolute;
-	top: 2em;
-	left: 28em;
-	bottom: 2em;
-	right: 2em;
-	border: 1px solid #bbb;
-	background-color: white;
-	overflow: auto;
 	margin: 0;
 	padding: 0;
 }

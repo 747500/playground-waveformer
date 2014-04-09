@@ -19,6 +19,7 @@
     "when": "*",
     "express": "*",
     "strftime": "*",
+    "sprintf": "*",
     "canvas": "*"
   },
   "author": "Serge R",

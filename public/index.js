@@ -1,38 +1,75 @@
 
 $(function () {
 
+	var $form = $('form');
 	var form = {
 		schema: {
-			smooth: {
-				type: 'boolean',
-				title: 'smooth',
-				description: 'Enable smoothing',
-				required: true
-			},
-			width: {
-				type: 'integer',
-				title: 'width',
-				description: 'Width of result picture',
-				required: true
-			},
-			height: {
-				type: 'integer',
-				title: 'height',
-				description: 'Height of result picture',
-				required: true
-			},
-			sspace: {
-				type: 'integer',
-				title: 'sspace',
-				description: 'Left&right padding space',
-				required: true
-			},
-			hspace: {
-				type: 'integer',
-				title: 'hspace',
-				description: 'Space between positive and' +
-						' negative parts of waveform',
-				required: true
+			type: 'object',
+			properties: {
+				rendering: {
+					type: 'object',
+					title: 'Рендеринг',
+					properties: {
+						smooth: {
+							type: 'boolean',
+							title: 'smooth',
+							description: 'Использовать сглаживание',
+							required: true
+						}
+					},
+				},
+				size: {
+					type: 'object',
+					title: 'Размеры',
+					properties: {
+						width: {
+							type: 'integer',
+							title: 'width',
+							description: 'Ширина картинки',
+							required: true
+						},
+						height: {
+							type: 'integer',
+							title: 'height',
+							description: 'Высота каритинки',
+							required: true
+						}
+					}
+				},
+				indenting: {
+					type: 'object',
+					title: 'Отступы',
+					properties: {
+						sspace: {
+							type: 'integer',
+							title: 'sspace',
+							description: 'Ширина отступов слева и справа',
+							required: true
+						},
+						hspace: {
+							type: 'integer',
+							title: 'hspace',
+							description: 'Высота отступа между верхом и низом',
+							required: true
+						}
+					}
+				},
+				colors: {
+					type: 'object',
+					title: 'Цвет',
+					properties: {
+						positive: {
+							type: 'color',
+							title: 'positive',
+							description: 'Цвет верхней части'
+						},
+						negative: {
+							type: 'color',
+							title: 'negative',
+							description: 'Цвет нижней части'
+						}
+					}
+				}
 			}
 		}
 	};
@@ -42,14 +79,7 @@ $(function () {
 		method: 'GET',
 		contentType: 'application/json',
 		success: function (content, status) {
-			var formdata = [ ];
-			_(content).each(function (value, name) {
-				if (form.schema[name]) {
-					form.schema[name].default = value;
-				}
-			});
-
-			showForm(formdata);
+			showForm(content);
 		},
 		error: function (content, status) {
 			console.log('!', content, status);
@@ -57,11 +87,15 @@ $(function () {
 	});
 
 	function postFormData(errors, values) {
-
 		if (errors) {
 			console.log('!', errors);
 			return;
 		}
+
+		console.log('+', JSON.stringify(values, null, 2));
+
+//		return;
+
 
 		$.ajax({
 			url: '/gen',
@@ -69,7 +103,7 @@ $(function () {
 			contentType: 'application/json',
 			data: JSON.stringify(values, null, 2),
 			success: function (content, status) {
-//				console.log('+', content, status);
+	//			console.log('+', content, status);
 				$('div.content', 'div#wf-img').html(content);
 			},
 			error: function (content, status) {
@@ -79,10 +113,12 @@ $(function () {
 
 	}
 
-	function showForm() {
-		$('form').jsonForm({
+	function showForm(formdata) {
+		$form.html('');
+		$form.jsonForm({
 			schema: form.schema,
-			onSubmit: postFormData
+			onSubmit: postFormData,
+			value: formdata
 		});
 	}
 
