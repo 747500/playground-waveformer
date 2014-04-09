@@ -14,15 +14,17 @@
 	var raw2json = require('./lib/raw2json.js');
 	var waveform = require('./lib/waveform.js');
 
-	var afile = '/home/native/Music/vivaldi.mp3';
+//	var afile = '/home/native/Music/vivaldi.mp3';
 //	var afile = '/home/native/Music/A Wilhelm Scream - The Horse.mp3';
 //	var afile = '/var/www/Data/usersaudios/00/92/37/00299866137091379200/file.mp3';
+//	var afile = '/home/native/Music/01 Twisted Transistor/Unknown/00 - 2e399e2ccc3bad.mp3.mp3';
+	var afile = '/home/native/Music/Soul Hooligan/Unknown/01 - Algebra.mp3';
 
 	function log10(val) {
 		return Math.log(val) / Math.LN10;
 	}
 
-	var MINVAL = (1 / 255);
+	var MINVAL = 1 / 20;
 	var MAXVAL = log10((MINVAL + 1) / MINVAL);
 
 	module.exports.generator = function (req, res, next) {
@@ -32,17 +34,13 @@
 
 		ok = ok.then(function (result) {
 			var width_set = _.map(wfStyle, function (el) { return el.size.width; });
-			var ok = raw2json(result.stream, result.size, _.clone(width_set));
+			var ok = raw2json(result.stream, result.size / 2, _.clone(width_set));
 
 			return ok.then(function (peaks) {
 				var l = peaks[0].length;
 				for (var n = 0; n < l; n ++) {
-
  					var p0 = peaks[0][n];
-
-					var p = log10(
-						(MINVAL + p0) / MINVAL
-					) / MAXVAL;
+					var p = log10((MINVAL + p0) / MINVAL) / MAXVAL;
 
 					console.log(sprintf("%12.5f %12.5f", p0, p));
 
