@@ -5,10 +5,10 @@
 
 	var _ = require('underscore');
 
-	var sprintf = require('sprintf');
-
 	var when = require('when');
 	var whennode = require('when/node');
+
+	console.printf = require('./lib/printf.js');
 
 	var audio2raw = require('./lib/audio2raw.js');
 	var raw2json = require('./lib/raw2json.js');
@@ -21,14 +21,14 @@
 //	var afile = '/home/native/Music/Soul Hooligan/Unknown/01 - Algebra.mp3';
 	var afile = '/home/native/Music/Чайковский Петр Ильич [club13333245] - Времена года - Апрель- Подснежник.mp3';
 
+
 	function log10(val) {
 		return Math.log(val) / Math.LN10;
 	}
 
-
 	module.exports.generator = function (req, res, next) {
 		var wfStyle = [ req.body ];
-console.log(wfStyle);
+//console.log(wfStyle);
 		var MINVAL = 1 / wfStyle[0].size.height;
 		var MAXVAL = log10((MINVAL + 1) / MINVAL);
 
@@ -60,8 +60,8 @@ console.log(wfStyle);
 
 					var p0 = peaks[0][n] * k;
 
-				// empty graph on zero signal avoidance
-					p0 += .001;
+				// empty graph avoidance on zero signal
+					p0 += MINVAL;
 
 					var p;
 					if (wfStyle[0].preproc.log10) {
@@ -71,7 +71,7 @@ console.log(wfStyle);
 						p = p0;
 					}
 					peaks[0][n] = p;
-					console.log(sprintf("%12.5f %12.5f", p0, p));
+				//	console.printf("%12.5f %12.5f", p0, p);
 				}
 
 				return {
