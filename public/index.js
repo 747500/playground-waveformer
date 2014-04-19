@@ -6,20 +6,32 @@ $(function () {
 		schema: {
 			type: 'object',
 			properties: {
+				sampling: {
+					type: 'object',
+					title: 'Ресэмплинг',
+					properties: {
+						type: {
+							type: 'string',
+							title: 'Способ усреднения',
+							description: 'sampling.type',
+							enum: [ 'average', /* 'geometric', */ 'maximum' ]
+						}
+					}
+				},
 				preproc: {
 					type: 'object',
 					title: 'Препроцессинг',
 					properties: {
 						maximize: {
 							type: 'boolean',
-							title: 'preproc.maximize',
-							description: 'Усиление/нормализация',
+							title: 'Нормализация',
+							description: 'preproc.maximize',
 							required: true
 						},
 						log10: {
 							type: 'boolean',
-							title: 'preproc.log10',
-							description: 'Логарифмическая шкала',
+							title: 'Логарифмическая шкала',
+							description: 'preproc.log10',
 							required: true
 						}
 					}
@@ -30,14 +42,14 @@ $(function () {
 					properties: {
 						smooth: {
 							type: 'boolean',
-							title: 'rendering.smooth',
-							description: 'Использовать сглаживание',
+							title: 'Сглаживание',
+							description: 'rendering.smooth',
 							required: true
 						},
 						lineWidth: {
 							type: 'number',
-							title: 'rendering.lineWidth',
-							description: 'Толщина инструмента',
+							title: 'Толщина инструмента',
+							description: 'rendering.lineWidth',
 							required: true
 						}
 					},
@@ -48,14 +60,14 @@ $(function () {
 					properties: {
 						width: {
 							type: 'integer',
-							title: 'size.width',
-							description: 'Ширина картинки',
+							title: 'Ширина картинки',
+							description: 'size.width',
 							required: true
 						},
 						height: {
 							type: 'integer',
-							title: 'size.height',
-							description: 'Высота каритинки',
+							title: 'Высота каритинки',
+							description: 'size.height',
 							required: true
 						}
 					}
@@ -66,14 +78,14 @@ $(function () {
 					properties: {
 						sspace: {
 							type: 'integer',
-							title: 'indenting.sspace',
-							description: 'Ширина отступов слева и справа',
+							title: 'Отступ слева и справа',
+							description: 'indenting.sspace',
 							required: true
 						},
 						hspace: {
 							type: 'integer',
-							title: 'indenting.hspace',
-							description: 'Высота отступа между верхом и низом',
+							title: 'Отступ между верхом и низом',
+							description: 'indenting.hspace',
 							required: true
 						}
 					}
@@ -84,13 +96,13 @@ $(function () {
 					properties: {
 						positive: {
 							type: 'color',
-							title: 'colors.positive',
-							description: 'Цвет верхней части'
+							titile: 'Цвет верхней части',
+							description: 'colors.positive'
 						},
 						negative: {
 							type: 'color',
-							title: 'colors.negative',
-							description: 'Цвет нижней части'
+							titile: 'Цвет нижней части',
+							description: 'colors.negative'
 						}
 					}
 				}

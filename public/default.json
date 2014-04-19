@@ -18,5 +18,8 @@
   "preproc": {
     "maximize": true,
     "log10": true
+  },
+  "sampling": {
+    "type": "avg"
   }
 }

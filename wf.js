@@ -35,8 +35,7 @@
 		var ok = audio2raw(afile);
 
 		ok = ok.then(function (result) {
-			var width_set = _.map(wfStyle, function (el) { return el.size.width; });
-			var ok = raw2json(result.stream, result.size / 2, _.clone(width_set));
+			var ok = raw2json(result.stream, result.size, wfStyle);
 
 			return ok.then(function (peaks) {
 				var l = peaks[0].length;
